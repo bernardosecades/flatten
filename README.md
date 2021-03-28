@@ -15,8 +15,11 @@ POST : http://localhost:8085/flatten
 
 GET: http://localhost:8085/history
 
-![flatten](demo/history.png)
+![history](demo/history.png)
 
+Storage (postgreSQL with bytea columns to save history request and response)
+
+![history](demo/postgreSQL.png)
 
 # Run the project
 
