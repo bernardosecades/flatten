@@ -1,0 +1,35 @@
+version: '3.5'
+
+services:
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+      - ./db:/docker-entrypoint-initdb.d/
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+  web:
+    build:
+      context: .
+      target: builder # it'll use the same Dockerfile as prod, but stop at the builder stage to can execute go test
+    environment:
+      SERVER_PORT: 8085
+      DB_NAME: flatten
+      DB_USER: postgres
+      DB_PASS: changeme
+      DB_HOST: postgres
+      DB_PORT: 5432
+    restart: always
+    ports:
+      - 8085:8085
+    links:
+      - postgres
+
+volumes:
+  postgres:
