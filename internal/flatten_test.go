@@ -93,7 +93,7 @@ func TestFlattenWithMixTypeValues(t *testing.T) {
 	assert.Equal(t, BytesToString(resultBytes), "[3,\"berni\",3,3.5,\"3\"]")
 }
 
-func TestFlattenPepe(t *testing.T) {
+func TestFlattenEmpty(t *testing.T) {
 
 	js := "{\"input\":[]}"
 	a := make(map[string]interface{})
